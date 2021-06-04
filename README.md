@@ -12,3 +12,4 @@ This relates to epistemic logic through our use of advanced topics such as, ``co
 As inspiration for writing our epistemic logic for blockchain, we are going to use the following article, (in which they propose their own logic system, namely BCL, where they use dynamic logic to reason about blockchain updates, and finally, prove that BCL is sound and complete). 
 Brunnler Kai, Flumini, D., \& Studer, T. (2020). A logic of blockchain updates. Journal of Logic and Computation, 30(8), 1469–1485. \\https://doi.org/10.1093/logcom/exaa045
 
+To run: ``node smashingcoin.js``
