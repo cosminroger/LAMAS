@@ -1,18 +1,68 @@
 <!DOCTYPE html>
 <html>
+    <head>
+<link rel="stylesheet" href="style.css">
+<!--cite sttyle sheet: comparto https://www.free-css.com/free-css-templates/page266/comparto--> 
+    </head>
 <body>
-<h1>Blockchain simulation</h1>
+ 
+<h1 style="text-align:center">Blockchain simulation</h1>
 
-<h2>Introduction</h2>
-<p>This is a paragraph.</p>
+<h2 style="text-align:center">Introduction</h2>
+<center>
+<p style="width: 500px;" align="justify" style="text-align:justify" >
 
-<h2>Methods</h2>
-<p>This is a paragraph.</p>
+Nowadays, we keep hearing of the term <b>blockchain</b> and <b>cryptocurrency</b>, and although the second term is, at least in concept, well known, the first is not fully understood by many people. 
+In the present project, we are going to investigate how messages are sent among agents in a blockchain, make attempts at falsifying blockchain information and show how these are getting rejected. 
+We will provide a (simplified) blockchain model with the intent of graphically demonstrating all the perks of sending information through a blockchain.
+Our research question essentially amounts to:
+<br>
+<b>How does communication between agents work in a blockchain? What happens when not all agents are truthful? How are the messages verified?</b>
+ We will attempt to answer all of these questions by implementing our blockchain model, testing it and reporting the results.
+<br>
+<br>
+Essentially all cryptocurrency relies on the blockchain. Cryptocurrency at its core is a method of mainting a <b>decentralised currency</b>, not dependent on a central authority such as a certain goverment or bank as is the case of classical currency.
+But then who keeps track of all the transactions that take place and all the sums that everyone has in lieu of a cenbtral bank or authority ? The answer is everybody! 
+A blockchain is a system of computers that store and share a common database among all other computers (or participants/agents that are part of that blockchain). Essentially the blockchain can be said to crowdsource all the checks and balances normally performed by a central agency.
+So how does that work? Do the agents just have to trust each other? 
+That is fortunately not necessary, using concepts from logic such as <b>common knowledge and public announcements</b>, combined with communications protocols and certain algorithms, a blockchain is implemented which keeps tracks of everything and acts as a type of hive mind and impartial arbiter.
 
-<h2>Results (?)</h2>
-<p>This is a paragraph.</p>
 
-<h2>Conclusion</h2>
+<br>
+<br>
+But what really is a blockchain, how does it work, and how does it implement epistemic logic in its functioning?
+
+</p>
+
+<h2 style="text-align:center">Blockchain: what it is and how it works</h2>
+<p style="width: 500px;" align="justify" style="text-align:justify">
+    [work in progress]
+    In order to understand how a blockchain works let's consider the following example:
+    <br>
+    <br>
+    <i>Agent A</i> wants to send a message to <i>agent B</i>. 
+    Normally, one would send this message and it relies on other entities to make sure that the message got sent, namely, you rely on a third party. If the third party looses the message, or modifies it, it would not be a pleasant experience for the sender. 
+    <br>
+    <br>
+    This is where blockchains come in. These are a growing sequence of blocks which contain approved transaction alongside with a cryptographic hash of the previous block, creating the blockchain. 
+    So, the new block created at step i will contain an index i, its content D, and the hash of the previous block i-1. This blockchain is stored by every agent and any update needs to be made to the entire sequence. 
+    You cannot make a change at a step i-5, for instance, without changing the information in all blocks from i-4 to i. 
+    Given how big these blockchains and networks of agents are for some cryptocurrencies (like Ethereum and Bitcoin) and the fact that every message (block) received is further verified by some algorithms to ensure its validity, it is nearly impossible to falsify the information. 
+    Not only that one would need to falsify all the blocks up to a point as mentioned before, but it is also mandatory that at least 50%+1 agents from that network to perform the same operations, hence why it would be impossible to falsify the data contained in such a big blockchain.
+</p>
+
+<h2 style="text-align:center">Implementation: bringing the blockchain to life</h2>
+<p style="width: 500px;" align="justify" style="text-align:justify">
+    [work in progress]
+    As inspiration for the implementation of epistemic logic for our blockchain, we are used the following article: 
+    Brunnler Kai, Flumini, D., & Studer, T. (2020) <i>A logic of blockchain updates</i>. Journal of Logic and Computation, 30(8), 1469–1485. 
+    Tn this article an entirely new logic system is proposed, namely BCL, where dynamic logic is used to reason about blockchain updates, and finally, prove that BCL is sound and complete
+
+</p>
+
+<h2 style="text-align:center">Conclusions and discussion</h2>
 <p>This is a paragraph.</p>
+</center>
 </body>
+
 </html>
