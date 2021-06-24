@@ -36,7 +36,31 @@ But what really is a blockchain, how does it work, and how does it implement epi
 
 <h2 style="text-align:center">Blockchain: what it is and how it works</h2>
 <p style="width: 500px;" align="justify" style="text-align:justify">
-    [work in progress]
+    As mentioned, a blockchain is functioanlly a way to to keep track of transactions. It has the function of being an
+     impartial arbiter in deciding how money is being transfered as well as how much each agent has. 
+     It essentially guarantees the currency and its trading is fair and all decisions made with respect to it are equitable. 
+     <br>
+     <br>
+     The blockchain can for starters essentially be thought of as a big ledger or database. Within this database we would store 
+     all the information about all the trades that were ever made as well as the amount of money each agent has. However unlike classic 
+     databases the data is not simply structured in consecutive entries. Data is structured in blocks, esentially a collection of multiple
+     transactions or entries in our hypothetical ledger. Each block is filled with a number of transactions, and then added 
+     (along with a timestamp) to a chain of such blocks (hence the name) that form an indelible, traceable trade history
+      shared amongst all users. This represents the truth that all following blocks have to abide by.
+      <br>
+      <br>
+      So now we've seen how the blockchain is structured from a architectural standpoint, and know how the data stored in it looks, let 
+      us discuss how this data is added and verified. Essentially this relies on the decentralization of the blockchain, instead of storing
+      all the data in the blockchain in just one centralised location everyone gets a copy of it. Every user has full acces to the aforementioned
+      trade history that has been added in the blockchain since the respective user started using that particular cryptocurrency. So when 
+      a new transaction is to be added, it goes out to all (or a very large number of) users and compared with their local copy of the 
+      blockchain. Should a transaction not line up with this expansive history it can be quickly determined that a fraud attempt took place. 
+      Even if multiple users colaborate on the fraud, most blockchains use majority voting (although other algorithms have been known to be 
+      employed) to determine wether a transaction can be added or not to a block. As such a fraudster would need to control most of the users
+      in a network to perpetuate a fraud. As opposed to a normal currency where all trust is placed in a central authority, all of the users
+      of a cryptocurrency get to verify each transaction using the blockchain.
+    <br>
+    <br>
     In order to understand how a blockchain works let's consider the following example:
     <br>
     <br>
@@ -49,6 +73,9 @@ But what really is a blockchain, how does it work, and how does it implement epi
     You cannot make a change at a step i-5, for instance, without changing the information in all blocks from i-4 to i. 
     Given how big these blockchains and networks of agents are for some cryptocurrencies (like Ethereum and Bitcoin) and the fact that every message (block) received is further verified by some algorithms to ensure its validity, it is nearly impossible to falsify the information. 
     Not only that one would need to falsify all the blocks up to a point as mentioned before, but it is also mandatory that at least 50%+1 agents from that network to perform the same operations, hence why it would be impossible to falsify the data contained in such a big blockchain.
+    <br>
+    <br>
+    So how does this relate to epistemic logic? [to be continued]
 </p>
 
 <h2 style="text-align:center">Implementation: bringing the blockchain to life</h2>
