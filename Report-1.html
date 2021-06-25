@@ -8,7 +8,12 @@
  
 <h1 style="text-align:center">Blockchain simulation</h1>
 
+<br>
+<br>
 <h2 style="text-align:center">Introduction</h2>
+
+<br>
+<br>
 <center>
 <p style="width: 500px;" align="justify" style="text-align:justify" >
 
@@ -35,6 +40,8 @@ But what really is a blockchain, how does it work, and how does it implement epi
 </p>
 
 <h2 style="text-align:center">Blockchain: what it is and how it works</h2>
+<br>
+<br>
 <p style="width: 500px;" align="justify" style="text-align:justify">
     As mentioned, a blockchain is functioanlly a way to to keep track of transactions. It has the function of being an
      impartial arbiter in deciding how money is being transfered as well as how much each agent has. 
@@ -75,19 +82,74 @@ But what really is a blockchain, how does it work, and how does it implement epi
     Not only that one would need to falsify all the blocks up to a point as mentioned before, but it is also mandatory that at least 50%+1 agents from that network to perform the same operations, hence why it would be impossible to falsify the data contained in such a big blockchain.
     <br>
     <br>
-    So how does this relate to epistemic logic? [to be continued]
+    So how does this relate to epistemic logic? Well as mentioned before we are working mainly with the concepts of 
+    public announcement and common knowledge. Each copy of the blockchain that an agent has represents the indelible
+    history against which an agent compares all new facts. Therefore the blockchain itself can be thought of as 
+    a representation of the common knowledge shared between agents. Specifically the blockchain is the common knowledge
+    shared between truthful agents. It is by comparisson with this common knowledge that we can determine what is true
+    or not, propositions compatible with common knowledge being considered true and added to the block chain (and 
+    so the common knowledge of truthful agents) while propositions that create contradictions are considered false
+    and rejected. 
+    <br>
+    <br>
+    Every time an agent makes a transaction, this transaction is broadcast to other agents for verification.
+    This can therefore be thought of as an announcement. Just like in a classic epistemic logic announcement the transaction
+    is sent out as a proposition to all agents. The difference here is that instead of the announcement being considered
+    inherently truthful and believed, this announcement is actually compared to the common knowledge held by other agents.
+    Should this announcement be compatible with the common knowledge, the proposition within is added to the aforementioned
+    common knowledge. Should the announcement be determined to be false it will not be added to the common knowledge and
+    it will be identified as a false.
+    <br>
+    <br>
+    This logic of announcemetns and common knowledge underpins the functioning of the blockhcain and is what allows cyptocurrencies to 
+    function. This system can essentially be though of as solving many logic exercises as various trades get added to the blockchain. For
+    every trade added in the form of a public announcement the logic problem of <b>"can this exist given what we know, is the formula
+        valid given the common knowledge"</b>  is quickly solved by the various agents in the system ysing their copy of the blockchain.
+        Using this system a decentralised currency can be created by simply implementing these concepts of epistemic logic.
+     
 </p>
 
 <h2 style="text-align:center">Implementation: bringing the blockchain to life</h2>
+<br>
+<br>
 <p style="width: 500px;" align="justify" style="text-align:justify">
     [work in progress]
-    As inspiration for the implementation of epistemic logic for our blockchain, we are used the following article: 
+    As inspiration for the implementation of epistemic logic for our blockchain, we are used the following articles: 
     Brunnler Kai, Flumini, D., & Studer, T. (2020) <i>A logic of blockchain updates</i>. Journal of Logic and Computation, 30(8), 1469–1485. 
-    Tn this article an entirely new logic system is proposed, namely BCL, where dynamic logic is used to reason about blockchain updates, and finally, prove that BCL is sound and complete
+    In this article an entirely new logic system is proposed, namely BCL, where dynamic logic is used to reason about blockchain updates, and finally, prove that BCL is sound and complete.
+    As well as Halpern, Joseph & Pass, Rafael. (2017). <i>A Knowledge-Based Analysis of the Blockchain Protocol</i>. Electronic Proceedings in Theoretical Computer Science. 251. 324-335. 10.4204/EPTCS.251.22. 
+    This paper analyses blockchain through the lenses of classical logic rather than proposing a new one. It was ultimately this latter
+    paper that served as the basis of our implementation, although inspiration was also taken from <i>A logic of blockchain updates</i>.
+    <br>
+    <br>
+    Our implemetation was done in python, specifically as a python jupyter notebook. What we do in this implementation is simulate the 
+    functioning of a blockchain as multiple transactions take place. Esentially, where in a real blockhain we would have several asynchronous
+    users doing trades, in our implementation there will be a single thread modelling all of the interactions that would normally take place
+    and how various types of transactions would take place. This includes not only succesful transactions but also (unsuccesful) attempts
+    at fraudulent transactions to show the manner in which the blockchain ensures the validity of said transactions.In order to better
+    understand the functioning of our model, let us take a look at the various classes we have implemented and what each one does.
+    <br>
+    <br>
+    <b>The Agent</b> class is essentially our actor. Representing an agent who has an amount of money and makes transaction, this agent is
+    capable of sending and receiving messages as well as checking wether a transaction is acceptable. First of all to send messages,
+    this is the manner in which the agent initiates transactions or sends messages regarding transactions. The agent is not guaranteed
+    to succed and has a random chance of failing to send a message, meaning a basic system of higher order knowledge is used to ensure
+    communication. Messages are broadcast to all other agents that take part in the blockchain. Receiving messages is more complicated,
+    due to the fact that they depend more on other agents. A message first needs to be confirmed as still valid. As such the timestamp
+    of the message is first compared to the blockchain. If the message is found to be outdated it is deleted. Since the agent cannot 
+    control the rate at which messages come in, these messages are placed in a cue until the agent is ready to process them. Processing
+    the message in what constitutes the trust base of the blockchain. The agent analyses the content of the message and compares it to 
+    their local copy of the block chain. At this point the agent will check every transaction it knows took place and calculate wether
+    enough funds are available fo the transaction to be valid. If that is true then the message is marked as true, else it is considered
+    fraudulent. Transactions will also usually be received from two sources: the sender and the receiver. As such higher order knowledge
+    is used again to check that the message from both sources matches as well as to ensure the same transaction isn't processed twice.
 
 </p>
 
 <h2 style="text-align:center">Conclusions and discussion</h2>
+
+<br>
+<br>
 <p>This is a paragraph.</p>
 </center>
 </body>
