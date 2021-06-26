@@ -113,7 +113,6 @@ But what really is a blockchain, how does it work, and how does it implement epi
 <br>
 <br>
 <p style="width: 500px;" align="justify" style="text-align:justify">
-    [work in progress]
     As inspiration for the implementation of epistemic logic for our blockchain, we are used the following articles: 
     Brunnler Kai, Flumini, D., & Studer, T. (2020) <i>A logic of blockchain updates</i>. Journal of Logic and Computation, 30(8), 1469–1485. 
     In this article an entirely new logic system is proposed, namely BCL, where dynamic logic is used to reason about blockchain updates, and finally, prove that BCL is sound and complete.
@@ -143,6 +142,59 @@ But what really is a blockchain, how does it work, and how does it implement epi
     enough funds are available fo the transaction to be valid. If that is true then the message is marked as true, else it is considered
     fraudulent. Transactions will also usually be received from two sources: the sender and the receiver. As such higher order knowledge
     is used again to check that the message from both sources matches as well as to ensure the same transaction isn't processed twice.
+    <br>
+    <br>
+    <b>The Block</b> calss is as the name suggests the building block of the blockchain. A block represents essentially any transaction or
+    message that gets added to the blockchain. It is the elementary storage unit for data in our system and ultimately has the role of 
+    recording and storing any actions taking place in the system. The block has the ability to store data about a pareticular message or
+    transaction, and to that end it contains a data field for storing the actual content of what it is registering, as well as fields for
+    recording the agents involved, under the names of <i>sender</i> and <i>receiver</i>. These blocks will additionally  need to eventually 
+    be linked up into the blockchain, and in order to acomplish this two more features are required. Firstlly, each block is numbered, this 
+    allows the system to keep track of the order of transactions and events, the numbering of these blocks monotonously increases, with the
+    first block in the blockchain being block 0. Secondly, each block has a unique hash value. This hash value expresses the identity of the
+    block and is made up using data from all other parameter of the current block plus the hash of the previous block (which ensures traceability).
+    Also related to the block class is another class the <b>pendingBlock</b>. This pendingBlock class essentially acts as an intermediary
+    being used to store, as the name implies, pending blocks either from the memeory of various agents or in queue to be added to the blockchain.
+    The pendingBlock class is similar to Block in the type of information it stores only it dosen't have a hash or number field, instead being
+    identified through a simple ID. Additionally the pendingBlock class also has a few extra features that facilitate checking and validating.
+    <br>
+    <br>
+    <b>The BlockChain</b> calss is perhaps the most important class in our implementation, tying everything toghether and implementing the
+    very backbone of our model. The BlockChain class doubles as not only implementing the blockchain itself but also acting as a sort of
+    run function for our simulation, setting everything into motion. The BlockChain we use is essentially a series of blocks, with several 
+    methods which ensure that all the blocks being added are valid and in the correct order. Our BlockChain also additionally keeps track of
+    agents (this is more related to it's secondary function than necessarily an actual blockchain) and has a queue of pending blocks that are
+    to be checked and added.
+    <br>
+    <br>
+    First we will talk about the BlockChain class as it relates to the functioning as structure of actual blockchains. At the very root of
+    the BlockChain is what is known a a genesis block, which has 0 in all fields. Every blockchain has such a block and it represents the
+    starting point of the chain.  From here new blocks are added to the cahin, if they are valid of course, a sabity check is also performed
+    at this stage. We implemented a treshold of 5 for the checks performed before adding or removing a block. That is to say if 5 different 
+    agents agree that a certain block  is correct the respective block will be aproved and added to th blockchain. Conversely, if 5 agents
+    agree that a block is fraudulent said block is deleted. This relatively low threshold provides slightly less protection than real life 
+    blockchains however it also greatly increases performance, and as there is no way for the agent that initiates the transaction to know
+    which agents will be veryfiyng it first (and therefore that it needs to manipulate) this is still a resonably safe method. Finally, at
+    every timestep the validity of the blockchain is verified, block hashes are inspected and validated. 
+    <br>
+    <br>
+    Second we will talk about the BlockChain class as it relates to the implementation and running of our simulation. As discussed previously, rather
+    than model our simulation of a blockchain using multiple asynchronous threads representing each agent we have decided that for the purposes
+    of analysing the manner in which a blockchain functions form the point of view of epistemic logic, as well as to increase performance,
+    we would implement a model running a number of transactions from various agents in a single thread. This thread is implemented within 
+    the BlockChain class. First of all the setup: our simulation considers 100 agents each with 1000 coins. The creation of these agents 
+    also constitutes the first blocks added to the blockchain after the genesis block, unlike blocks initiated by agents these initial 
+    blocks do not need to be verified as we are sure they are valid. Then the actual simulation is implemented as a stochastic process. First,
+    at every time step two different random agents are selected, these agents will begin a transaction. A transaction however will not always
+    be succesful or truthfull. For every transaction there is a chance that either the transaction will be invalid or that the sneder and
+    receiver will disagree about it's contents, these represent fraudulent messages which will be idetified as such. There is also a chance
+    that a message will fail for unkown reasons, this is to essentially model the inherent risk in any communication method. After messages related to all transactions that take place during a timestep have been sent out, they are 
+    analysed and processsed. First the actual sending out of the messages happens, where these messages are sent to other agents. These messages
+    are then place in a queue individual for each agent. Agents go through their respective queues and analyse the messages in them, either
+    validating or invalidating them. All valid messages are formed into blocks and added to the blockchain, then agents are updated with 
+    respect to this change of the blockchain. Finally the blockchain checks that it's integrity has not been compromissed and the whole process
+    repeats in the following timestep.
+
 
 </p>
 
@@ -150,7 +202,29 @@ But what really is a blockchain, how does it work, and how does it implement epi
 
 <br>
 <br>
-<p>This is a paragraph.</p>
+<p style="width: 500px;" align="justify" style="text-align:justify">
+
+Overall the blockchain met our expectations and performed correctly. We ran a simulation consisting of 10 timesteps. 
+The following parameters were used: a 10% chance for a message to be invalid due to an agent using more funds then they have,
+a 10% chance for the data to be invalid due to there being different messages from the sender and receiver, and a 30% chance that 
+sending a message will fail fo message transmission related reasons. Over the course of our simulations we not only saw messages added
+sucessfully but also blocks rejected by agents on the basis of them being found to be fraudulent. In short the blockchain model works, both
+as a ledger for transactions and as an arbiter ensuring that transactions are valid and fair. 
+<br>
+<br>
+As previously mentioned cryptocurrencies in general, and the blockchain in particular are very interesting real world cutting edge applications
+of concepts  found in epistemic logic. A blockchain can be thought essentially as a system of accountability based on employing a group of
+perfect logicians. Everytime someone does anything they must make a public announcement, sharing the knowledge of what thay have done with
+everyone. These perfect logicians then use their knowledge of preexisting facts in order to decide wether that action is possible. Should 
+there be contradictions the action is determined to be a lie. All of these preesxisting facts then form a common knowledge shared between
+all truthful agents, essentially the blockchain. This type of application of logic has allowed a big change in the dynamics of economic 
+systems across the planet. By using this new system it is now possible to create a currency system that is completly decentralised, removed
+from any sort of central governing authority and that therefore does not require the trust of its users be placed into a single ideological, 
+political or economic body. Indeed it rather requires trusting that everyone else is mainly interesting in only serving their own interests,
+yet through the implementation of this, ultimately robust and not overly complicated logic system of checking public announcements against
+a pool of common knowledge these interests are able to be used to guarantee equitability and a trustworthy system for all.
+
+</p>
 </center>
 </body>
 
